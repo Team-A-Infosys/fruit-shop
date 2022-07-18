@@ -1,6 +1,7 @@
 package team.a.fruitshop.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import team.a.fruitshop.entity.Fruit;
 import team.a.fruitshop.service.FruitService;
@@ -25,7 +26,23 @@ public class FruitController {
 
     @PutMapping("/fruit/{id}")
     public Fruit updateFruit(@PathVariable("id") Long id, @RequestBody Fruit fruit){
+        fruit.setFruitId(id);
         return this.fruitService.updateFruit(fruit);
+    }
+
+    @GetMapping("/fruits")
+    public List<Fruit> getAllFruits(){
+        return this.fruitService.getAllFruits();
+    }
+
+    @DeleteMapping("/fruit/{id}")
+    public ResponseEntity<?> deleteFruit(@PathVariable("id") Long id){
+        Fruit deleteFruit = new Fruit();
+        deleteFruit.setFruitId(id);
+
+        this.fruitService.deleteFruit(deleteFruit);
+
+        return ResponseEntity.ok().build();
     }
 
 }
