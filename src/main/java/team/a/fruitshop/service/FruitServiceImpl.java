@@ -30,8 +30,8 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public Fruit updateFruit(Fruit fruit) {
-        Fruit updateFruit = this.getFruit(fruit.getFruitId());
-        return this.fruitRepository.save(updateFruit);
+        this.getFruit(fruit.getFruitId());
+        return this.fruitRepository.save(fruit);
     }
 
     @Override
